@@ -28,13 +28,21 @@ const light = new THREE.DirectionalLight("white", 1);
 light.position.set(1, 2, 5); // Adjusted light position
 scene.add(light);
 
+// Add event listener for mouse movement
+document.addEventListener("pointermove", (event) => {
+  // Calculate the rotation based on the mouse movement
+  const rotationX =
+    (event.clientY / window.innerHeight) * Math.PI - Math.PI / 2;
+  const rotationY = (event.clientX / window.innerWidth) * Math.PI * 2 - Math.PI;
+
+  // Apply the rotation to the sphere
+  sphere.rotation.x = rotationX;
+  sphere.rotation.y = rotationY;
+});
+
 // Animation loop
 const animate = function () {
   requestAnimationFrame(animate);
-
-  // Rotate the sphere
-
-  sphere.rotation.y += 0.01;
 
   // Render the scene with the updated camera and light positions
   renderer.render(scene, camera);
